@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TournamentHub — турниры по киберспорту и настольным играм</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="crt" aria-hidden="true"></div>
+
+  <!-- ШАПКА -->
+  <header class="header">
+    <a href="#top" class="logo">
+      <span class="logo-mark">▶</span>
+      <span class="logo-text">Tournament<b>Hub</b></span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="#games" data-i18n="nav_games">Игры</a>
+      <a href="#tournaments" data-i18n="nav_tournaments">Турниры</a>
+      <a href="#bracket" data-i18n="nav_bracket">Сетка</a>
+      <a href="#schedule" data-i18n="nav_schedule">Расписание</a>
+      <a href="#news" data-i18n="nav_news">Новости</a>
+    </nav>
+
+    <div class="header-tools">
+      <div class="lang" role="group" aria-label="Language">
+        <button data-lang="ru" class="active">RU</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="ky">KY</button>
+      </div>
+      <button class="icon-btn" id="themeBtn" aria-label="Тема">◐</button>
+      <button class="btn btn-small" data-open-form data-i18n="register">Регистрация</button>
+      <button class="icon-btn burger" id="burger" aria-label="Меню">☰</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ГЕРОЙ -->
+    <section class="hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="hero-coin" data-i18n="hero_coin">1 ИГРОК — ВСТАВЬТЕ МОНЕТУ</p>
+        <h1 class="hero-title">
+          <span class="line l1">TOURNAMENT</span>
+          <span class="line l2">HUB</span>
+        </h1>
+        <p class="hero-text" data-i18n="hero_text">Турниры по киберспорту и настольным играм. Онлайн и офлайн. Собирай команду, регистрируйся и становись чемпионом.</p>
+        <div class="hero-actions">
+          <a href="#tournaments" class="btn blink" data-i18n="hero_cta1">▶ Смотреть турниры</a>
+          <button class="btn btn-ghost" data-open-form data-i18n="register">Регистрация</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b data-count="1280">0</b><span data-i18n="stat_players">игроков</span></div>
+        <div class="stat"><b data-count="86">0</b><span data-i18n="stat_tournaments">турниров</span></div>
+        <div class="stat"><b data-count="8">0</b><span data-i18n="stat_games">игр</span></div>
+        <div class="stat"><b data-count="450000" data-suffix=" KGS">0</b><span data-i18n="stat_prize">призовой фонд</span></div>
+      </div>
+    </section>
+
+    <!-- БЕГУЩАЯ СТРОКА -->
+    <div class="ticker" aria-label="Live">
+      <div class="ticker-track" id="ticker"></div>
+    </div>
+
+    <!-- ИГРЫ -->
+    <section class="section" id="games">
+      <h2 class="section-title" data-i18n="games_title">Выбери игру</h2>
+      <div class="games" id="gamesGrid"></div>
+    </section>
+
+    <!-- ТУРНИРЫ -->
+    <section class="section" id="tournaments">
+      <h2 class="section-title" data-i18n="tournaments_title">Ближайшие турниры</h2>
+      <div class="filters">
+        <div class="chips" id="gameChips"></div>
+        <div class="chips" id="formatChips"></div>
+      </div>
+      <div class="cards" id="tournamentList"></div>
+    </section>
+
+    <!-- СЕТКА -->
+    <section class="section" id="bracket">
+      <h2 class="section-title" data-i18n="bracket_title">Турнирная сетка</h2>
+      <p class="hint" data-i18n="bracket_hint">Нажми на команду, чтобы выбрать победителя матча.</p>
+      <div class="bracket-wrap">
+        <div class="bracket" id="bracketBox"></div>
+      </div>
+      <button class="btn btn-ghost btn-small" id="bracketReset" data-i18n="bracket_reset">Сбросить</button>
+    </section>
+
+    <!-- РАСПИСАНИЕ -->
+    <section class="section" id="schedule">
+      <h2 class="section-title" data-i18n="schedule_title">Расписание матчей</h2>
+      <div class="schedule" id="scheduleList"></div>
+    </section>
+
+    <!-- НОВОСТИ -->
+    <section class="section" id="news">
+      <h2 class="section-title" data-i18n="news_title">Новости</h2>
+      <div class="news" id="newsList"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="logo-text">Tournament<b>Hub</b></div>
+    <p data-i18n="footer_text">Демо-версия. Все данные — тестовые.</p>
+    <p class="game-over">GAME OVER? <span class="blink-text">CONTINUE ▶ 9 8 7 …</span></p>
+  </footer>
+
+  <!-- ФОРМА РЕГИСТРАЦИИ -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+      <button class="modal-close" id="modalClose" aria-label="Закрыть">✕</button>
+      <h3 id="formTitle" data-i18n="form_title">Регистрация на турнир</h3>
+      <form id="regForm" novalidate>
+        <label><span data-i18n="f_tournament">Турнир</span>
+          <select name="tournament" id="fTournament" required></select>
+        </label>
+        <label><span data-i18n="f_nick">Ник</span>
+          <input name="nick" type="text" required minlength="2" maxlength="24" autocomplete="nickname">
+        </label>
+        <label><span data-i18n="f_team">Команда (если есть)</span>
+          <input name="team" type="text" maxlength="30">
+        </label>
+        <label><span data-i18n="f_contact">Telegram или телефон</span>
+          <input name="contact" type="text" required minlength="5" maxlength="40">
+        </label>
+        <p class="form-error" id="formError" role="alert"></p>
+        <button class="btn" type="submit" data-i18n="f_submit">Отправить заявку</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
